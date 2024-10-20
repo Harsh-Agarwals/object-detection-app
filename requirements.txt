@@ -8,6 +8,6 @@ requests
 pillow
 PyYAML
 setuptools
-# streamlit
+matplotlib
 pytest
 streamlit
