@@ -45,7 +45,7 @@ if uploaded_file is not None:
         # Converting the image to PIL format to download it
         pil_image = Image.fromarray(rgb_image)
 
-        # Save the image to a BytesIO object
+        # Saving the image to a BytesIO object
         img_bytes = io.BytesIO()
         pil_image.save(img_bytes, format='PNG')
         img_bytes = img_bytes.getvalue()  # Gettign the bytes of the image

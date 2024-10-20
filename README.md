@@ -35,7 +35,7 @@ pip install -r requirements.txt
 Step-6: Running the app (Running the Flask app)
 ```
 python flask_app.py
-go to http://127.0.0.1:5000/object-detection-app
+go to http://127.0.0.1:8080/object-detection-app
 Input image and confidence threshold and click on the button to generate the object detections.
 ``` 
 

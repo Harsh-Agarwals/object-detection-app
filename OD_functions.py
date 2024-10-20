@@ -16,18 +16,35 @@ colors = {
 }
 
 def load_model():
+    """
+    Function to load the YOLOv5 model.
+    Input: None
+    Output: YOLOv5 model
+    """
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
     model.eval()
     return model
 
 def detect_objects(model, image, app):
+    """
+    Function to detect the objects in the image.
+    Input: YOLOv5 model, image, app (flask or streamlit)
+    Output: Predictions
+    """
     if app == "flask":
+        # Getting the file from images folder, if the app is flask
+        # When the app is initialized, the image is saved in the images folder
         basepath = os.getcwd()
         image_path = os.path.join(basepath, "images")
         image = os.path.join(image_path, image)
     return model(image)
 
 def get_top_predictions_details(result, confidence_level):
+    """
+    Function to get the top predictions details.
+    Input: YOLOv5 result, confidence level
+    Output: Predictions
+    """
     detections = {}
 
     for idx, res in enumerate(result.pred[0]):
@@ -41,6 +58,11 @@ def get_top_predictions_details(result, confidence_level):
     return detections
 
 def draw_bounding_boxes(image, predictions, app):
+    """
+    Function to draw the bounding boxes on the image.
+    Input: Image, predictions, app (flask or streamlit)
+    Output: Image with bounding boxes
+    """
     if app == "flask":
         basepath = os.getcwd()
         image_path = os.path.join(basepath, "images")
