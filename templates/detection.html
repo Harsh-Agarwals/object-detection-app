@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detection Results</title>
+    <meta name="author" content="Harsh Agarwal">
+    <meta name="description" content="Object Detection Results">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <!-- <link rel="stylesheet" href="styles2.css"> -->
+</head>
+<body>
+
+    <header>
+        <h1>Object Detection Results</h1>
+        <p>Here are the results of the object detection model:</p>
+    </header>
+
+    <div>
+        <!-- <h3>Actual Image</h3>
+        <img src="{{ url_for('static', filename='images/' + actual_image + '.jpg') }}" alt="Uploaded Image"> -->
+
+        <h3>Detected Objects</h3>
+        <p>{{ detected_objects }}</p>
+
+        <h3>Confidence Threshold</h3>
+        <p>{{ confidence }}</p>
+
+        <h3>Object Detection Image</h3>
+        <img src="{{ url_for('static', filename='results/' + filename1 + '.jpg') }}" alt="Detected Objects">
+
+        <div class="buttons"></div>
+            <a href="{{ url_for('static', filename='results/' + filename1 + '.jpg') }}" download="{{ filename1}}.jpg">
+                <button>Download OD Image</button>
+            </a>
+            <a href="{{ url_for('static', filename='results/' + filename2 + '.json') }}" download="{{ filename2 }}.json">
+                <button>Download OD JSON File</button>
+            </a>
+        </div>
+
+    </div>
+</body>
+</html>

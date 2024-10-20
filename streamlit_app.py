@@ -12,7 +12,8 @@ st.title("Object Detection App")
 st.write("This is a simple object detection app built with Streamlit and Flask. Please upload an image, then click on the button to generate the object detections and click on download to download the OD image with the json file containing the details.")
 
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-filename = uploaded_file.name.split(".")[0]
+if uploaded_file is not None:
+    filename = uploaded_file.name.split(".")[0]
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
@@ -28,7 +29,7 @@ if uploaded_file is not None:
     button = st.button("Detect Objects")
 
     if button:
-        result = detect_objects(model, image)
+        result = detect_objects(model, image, "streamlit")
         predictions = get_top_predictions_details(result, confidence_level)
 
         st.subheader(f"Here are the top detected objects with conficence >= {confidence_level}")
@@ -36,7 +37,7 @@ if uploaded_file is not None:
         st.write(predictions)
 
         # Drawing the bounding boxes on the image
-        rgb_image = draw_bounding_boxes(image, predictions)
+        rgb_image = draw_bounding_boxes(image, predictions, "streamlit")
 
         # Showing the image with the bounding boxes
         st.image(rgb_image, caption="Image with bounding boxes", width=500)

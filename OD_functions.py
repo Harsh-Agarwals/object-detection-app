@@ -2,6 +2,7 @@ import torch
 import cv2
 import numpy as np
 import random
+import os
 
 # Colors for the bounding boxes
 colors = {
@@ -19,7 +20,11 @@ def load_model():
     model.eval()
     return model
 
-def detect_objects(model, image):
+def detect_objects(model, image, app):
+    if app == "flask":
+        basepath = os.getcwd()
+        image_path = os.path.join(basepath, "images")
+        image = os.path.join(image_path, image)
     return model(image)
 
 def get_top_predictions_details(result, confidence_level):
@@ -35,7 +40,13 @@ def get_top_predictions_details(result, confidence_level):
 
     return detections
 
-def draw_bounding_boxes(image, predictions):
+def draw_bounding_boxes(image, predictions, app):
+    if app == "flask":
+        basepath = os.getcwd()
+        image_path = os.path.join(basepath, "images")
+        image = os.path.join(image_path, image)
+        image = cv2.imread(image)
+
     # Converting the image to BGR format since openCV uses BGR format
     img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
     for obj in predictions.keys():
